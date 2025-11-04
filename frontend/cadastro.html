@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./imgs/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./css/cadastro.css" />
+  <script src="script.js" defer></script>
+  <title>Cadastro de Usuário</title>
+</head>
+<body class="cadastro-page">
+ <header>
+      <nav class="container">
+        <h1>Biblioteca Online</h1>
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="cadastro.html">Cadastre-se</a></li>
+          <li><a href="cadastrolivro.html">Cadastrar Livro</a></li>
+        </ul>
+      </nav>
+    </header>
+
+  <main>
+    <section class="form-container">
+      <h2>Faça seu cadastro</h2>
+      <form method="post" action="http://127.0.0.1:1506/cadastro" accept-charset="UTF-8"id="cadastro">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required />
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" maxlength="11" required />
+
+        <label for="genero">Qual seu gênero preferido?</label>
+        <select id="genero" name="genero" required>
+          <option value="">Selecione</option>
+          <option value="Romance">Romance</option>
+          <option value="Suspense">Suspense</option>
+          <option value="Fantasia">Fantasia</option>
+        </select>
+
+        <button type="submit">Validar</button>
+        <p id="mensagem"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+      <p>
+        &copy; 2025 Biblioteca Online | Desenvolvido por Maria Longuim e
+        Gabrielli Kachio
+      </p>
+    </footer>
+</body>
+</html>

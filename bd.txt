@@ -1,0 +1,6 @@
+npm install cors express mysql2
+
+mysql -u root -p 
+bd
+
+nodemon index.js
