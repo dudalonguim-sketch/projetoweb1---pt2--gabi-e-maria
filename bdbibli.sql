@@ -6,12 +6,12 @@ CREATE TABLE livros (
     titulo VARCHAR(100) NOT NULL,
     autor VARCHAR(100) NOT NULL,
     genero ENUM('Romance', 'Suspense', 'Fantasia'),
-    descricao VARCHAR(255),
+    descricao TEXT,
     imagem TEXT
 );
 
 INSERT INTO livros (titulo, autor, genero, descricao, imagem) VALUES
-("É Assim que Acaba", "Colleen Hoover", "Romance", "Lily, uma jovem neurocirurgiã, conhece Ryle, um médico teimoso e confiante. Tudo parece perfeito até que segredos do passado ressurgem.", "imgs/acaba2.png"),
+("É Assim que Acaba", "Colleen Hoover", "Romance", "Lily, uma jovem florista, conhece Ryle, um médico teimoso e confiante. Tudo parece perfeito até que segredos do passado ressurgem.", "imgs/acaba2.png"),
 
 ("Eu e Esse Meu Coração", "C.C. Hunter", "Romance", "Leah ganha uma nova chance de viver com um transplante de coração, mas descobre segredos que a levam a investigar a vida do doador.", "imgs/coracao2.png"),
 
