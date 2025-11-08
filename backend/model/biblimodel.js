@@ -6,6 +6,12 @@ const inserirLivro = (livros, callback) => {
     db.query(sql, values, callback);
 };
 
+const buscarLivros = (callback) => {
+  const sql = 'SELECT * FROM livros';
+  db.query(sql, callback);
+};
+
 module.exports = {
-    inserirLivro
+    inserirLivro,
+    buscarLivros
 };

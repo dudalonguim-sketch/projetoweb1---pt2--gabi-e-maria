@@ -7,6 +7,7 @@ router.get('/',  (req, res) => {
 });
 
 router.post('/livros', biblicontroller.salvarLivro);
+router.get('/livros', biblicontroller.listarLivros);
 
 module.exports = router;  
 

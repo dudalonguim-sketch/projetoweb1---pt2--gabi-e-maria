@@ -13,3 +13,14 @@ exports.salvarLivro = (req, res) => {
   });
 }
 
+exports.listarLivros = (req, res) => {
+  biblimodel.buscarLivros((err, results) => {
+    if (err) {
+      console.error('Erro ao buscar livros:', err);
+      res.status(500).send('Erro ao buscar livros.');
+    } else {
+      res.json(results); // devolve os livros pro front
+    }
+  });
+};
+
