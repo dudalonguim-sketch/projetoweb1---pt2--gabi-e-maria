@@ -6,5 +6,5 @@ CREATE TABLE cadastrocliente (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     cpf VARCHAR(11) NOT NULL,
-    genero VARCHAR(50) NOT NULL
+    genero VARCHAR(50)
 );

@@ -5,9 +5,9 @@ CREATE TABLE livros (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
     autor VARCHAR(100) NOT NULL,
-    genero ENUM('Romance', 'Ação', 'Suspense', 'Terror', 'Fantasia'),
+    genero ENUM('Romance', 'Suspense', 'Fantasia'),
     descricao VARCHAR(255),
-    imagem VARCHAR(255)
+    imagem TEXT
 );
 
 INSERT INTO livros (titulo, autor, genero, descricao, imagem) VALUES
