@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS biblioteca;
+DROP DATABASE IF EXISTS biblioteca;
+CREATE DATABASE biblioteca;
 USE biblioteca;
 
 CREATE TABLE livros (
@@ -28,3 +29,5 @@ INSERT INTO livros (titulo, autor, genero, descricao, imagem) VALUES
 ("Percy Jackson e o Ladrão de Raios", "Rick Riordan", "Fantasia", "Percy descobre que é filho de Poseidon e embarca em uma missão para impedir uma guerra entre os deuses do Olimpo.", "imgs/percy2.png"),
 
 ("A Biblioteca da Meia-Noite", "Matt Haig", "Fantasia", "Nora Seed encontra uma biblioteca entre a vida e a morte onde pode explorar versões alternativas de sua vida.", "imgs/biblioteca2.png");
+
+

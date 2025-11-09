@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS cadastrocliente;
+DROP DATABASE IF EXISTS cadastrocliente
+CREATE DATABASE cadastrocliente;
 USE cadastrocliente;
 
 CREATE TABLE cadastrocliente (
