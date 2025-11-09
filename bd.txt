@@ -3,4 +3,7 @@ npm install cors express mysql2
 mysql -u root -p 
 bd
 
-nodemon index.js
+index.js roda biblioteca 
+indexc.js roda cadastros de usuarios
+nodemon index.js 
+node index.js no windows

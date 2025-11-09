@@ -119,3 +119,41 @@ footer {
 .livro {
   box-shadow: 0 8px 24px rgba(108, 46, 12, 0.363); /* sombra*/
 }
+
+/* --- Botões de ação minimalistas (sem fundo) --- */
+.acoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.acoes button {
+  background: none;
+  border: none;
+  color: #4a3c31;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.acoes button:hover {
+  color: #a9746e;
+  transform: scale(1.2);
+}
+
+.btn-del {
+  color: #8b0000;
+}
+
+.btn-del:hover {
+  color: #ff0000;
+}
+
+.btn-edit {
+  color: #003366;
+}
+
+.btn-edit:hover {
+  color: #0077ff;
+}
