@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const detalhes = document.getElementById("detalhes-livro");
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get("id"));
+  const origem = params.get("origem"); // <-- NOVO: identifica se veio do banco ou fixo
 
   if (!id) {
     detalhes.innerHTML = "<p>Nenhum livro selecionado.</p>";
@@ -9,41 +10,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    // Tenta buscar livros do backend
-    const res = await fetch("http://localhost:1304/livros");
-    const livrosDB = await res.json();
+    let livro;
 
-    // Junta livros fixos + livros cadastrados
-    const todosLivros = [
-      ...livros.map((l, i) => ({ ...l, id: i + 1 })),
-      ...livrosDB.map((l, i) => ({
-        id: livros.length + i + 1,
-        titulo: l.titulo,
-        autor: l.autor,
-        genero: l.genero,
-        descricao: l.descricao,
-        continuacao: "Não informado.",
-        imagem: l.imagem || "imgs/padrao.png"
-      }))
-    ];
-
-    // Busca o livro pelo id
-    const livro = todosLivros.find(l => l.id === id);
+    //Se o livro veio dos fixos (livros.js)
+    if (origem === "fixo") {
+      livro = livros.find(l => l.id === id);
+    } 
+    //Se veio do banco de dados
+    else if (origem === "banco") {
+      const res = await fetch(`http://localhost:1304/livros/${id}`);
+      if (!res.ok) {
+        detalhes.innerHTML = "<p>Livro não encontrado no banco.</p>";
+        return;
+      }
+      livro = await res.json();
+    } 
+    // Caso não tenha origem (link antigo)
+    else {
+      detalhes.innerHTML = "<p>Origem do livro não informada.</p>";
+      return;
+    }
 
     if (!livro) {
       detalhes.innerHTML = "<p>Livro não encontrado.</p>";
       return;
     }
 
-    // Renderiza as informações na tela com o estilo do seu CSS
+    // Renderiza as informações com seu layout padrão
     detalhes.innerHTML = `
-      <img src="${livro.imagem}" alt="${livro.titulo}">
+      <img src="${livro.imagem || 'imgs/padrao.png'}" alt="${livro.titulo}">
       <div>
         <h2>${livro.titulo}</h2>
         <p><strong>Autor(a):</strong> ${livro.autor}</p>
         <p><strong>Gênero:</strong> ${livro.genero}</p>
         <p><strong>Descrição:</strong> ${livro.descricao}</p>
-        <p><strong>Continuação:</strong> ${livro.continuacao}</p>
+        ${livro.continuacao ? `<p><strong>Continuação:</strong> ${livro.continuacao}</p>` : ""}
         <a href="index.html" class="voltar">&larr; Voltar</a>
       </div>
     `;
@@ -53,3 +54,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     detalhes.innerHTML = "<p>Erro ao carregar o livro.</p>";
   }
 });
+

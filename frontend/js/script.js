@@ -16,20 +16,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.warn("Backend offline. Exibindo apenas livros fixos.");
   }
 
-  const todosLivros = [
-    ...livros.map((l, i) => ({ ...l, id: i + 1, origem: "fixo" })), // fixos
-    ...livrosDB.map((l) => ({
-      id: l.id,
-      idBanco: l.id,
-      titulo: l.titulo,
-      autor: l.autor,
-      genero: l.genero,
-      descricao: l.descricao,
-      continuacao: "Não possui.",
-      imagem: l.imagem || "imgs/padrao.png",
-      origem: "banco"
-    }))
-  ];
+ const todosLivros = [
+  ...livros.map((l, i) => ({ ...l, id: i + 1, origem: "fixo" })),
+  ...livrosDB.map((l) => ({
+    id: l.id,
+    idBanco: l.id,
+    titulo: l.titulo,
+    autor: l.autor,
+    genero: l.genero,
+    descricao: l.descricao,
+    continuacao: "Não possui.",
+    imagem: l.imagem || "imgs/padrao.png",
+    origem: "banco" // <-- ESSENCIAL!
+  }))
+];
+
 
   main.innerHTML = "";
   categorias.forEach((genero) => {
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <img src="${livro.imagem}" alt="Capa de ${livro.titulo}">
         <h3>${livro.titulo}</h3>
         <p>Autor(a): ${livro.autor}</p>
-        <a href="livro.html?id=${livro.id}" class="ver-mais">Ver mais</a>
+        <a href="livro.html?id=${livro.id}&origem=${livro.origem}" class="ver-mais">Ver mais</a>
         ${isBanco ? `
           <div class="acoes">
             <button class="btn-edit" data-idbanco="${livro.idBanco}" aria-label="Editar">✎</button>

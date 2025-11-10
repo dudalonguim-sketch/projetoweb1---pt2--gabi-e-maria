@@ -67,3 +67,23 @@ exports.atualizarLivro = (req, res) => {
   });
 };
 
+exports.buscarLivroPorId = (req, res) => {
+  const id = req.params.id;
+  const sql = "SELECT * FROM livros WHERE id = ?";
+  const db = require('../config/db');
+
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      console.error("Erro ao buscar livro:", err);
+      return res.status(500).send("Erro no servidor.");
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send("Livro não encontrado.");
+    }
+
+    res.json(results[0]); // envia o livro específico pro frontend
+  });
+};
+
+
