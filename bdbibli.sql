@@ -30,4 +30,10 @@ INSERT INTO livros (titulo, autor, genero, descricao, imagem) VALUES
 
 ("A Biblioteca da Meia-Noite", "Matt Haig", "Fantasia", "Nora Seed encontra uma biblioteca entre a vida e a morte onde pode explorar versões alternativas de sua vida.", "imgs/biblioteca2.png");
 
+ALTER TABLE livros ADD COLUMN user_id INT;
+describe livros;
+SET SQL_SAFE_UPDATES = 0;
+SELECT * FROM livros;
+DELETE FROM livros WHERE user_id IS NULL;
+DELETE FROM livros WHERE user_id = '';
 

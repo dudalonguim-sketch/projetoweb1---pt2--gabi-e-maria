@@ -1,11 +1,13 @@
-DROP DATABASE IF EXISTS cadastrocliente
+DROP DATABASE IF EXISTS cadastrocliente;
 CREATE DATABASE cadastrocliente;
 USE cadastrocliente;
 
-CREATE TABLE cadastrocliente (
+CREATE TABLE cadastro (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    cpf VARCHAR(11) NOT NULL UNIQUE,
     genero VARCHAR(50)
 );
+
+ALTER TABLE cadastro ADD COLUMN senha VARCHAR(255) NOT NULL;

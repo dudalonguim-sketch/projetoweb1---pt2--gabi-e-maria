@@ -22,7 +22,7 @@
     <main>
       <section class="form-container">
         <h2>Cadastrar Um Novo Livro</h2>
-        <form method="post" action="http://127.0.0.1:1304/livros" accept-charset="UTF-8">
+        <form id="form-livro">
           <label for="titulo">Título do Livro:</label>
           <input type="text" id="titulo" name="titulo" required />
 
@@ -48,11 +48,56 @@
       </section>
     </main>
 
-     <footer>
+    <footer>
       <p>
         &copy; 2025 Biblioteca Online | Desenvolvido por Maria Longuim e
         Gabrielli Kachio
       </p>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const user_id = localStorage.getItem("user_id");
+         if (!user_id) {
+          alert("Você precisa estar cadastrado para adicionar livros.");
+          window.location.href = "login.html";
+        }
+
+
+        const form = document.getElementById("form-livro");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const dados = {
+            titulo: form.titulo.value,
+            autor: form.autor.value,
+            genero: form.genero.value,
+            descricao: form.descricao.value,
+            imagem: form.imagem.value,
+            user_id
+          };
+
+          try {
+            const res = await fetch("http://127.0.0.1:1304/livros", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(dados),
+            });
+
+            const msg = await res.text();
+            alert(msg);
+
+            if (res.ok) {
+              window.location.href = "index.html";
+            }
+          } catch (error) {
+            alert("Erro ao cadastrar livro!");
+            console.error(error);
+          }
+        });
+      });
+    </script>
+
   </body>
 </html>

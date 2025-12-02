@@ -157,3 +157,19 @@ footer {
 .btn-edit:hover {
   color: #0077ff;
 }
+
+.logout-btn {
+  background-color: #6c2d0c;
+  border: 2px solid #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #a9746e;
+  border-color: #a9746e;
+}

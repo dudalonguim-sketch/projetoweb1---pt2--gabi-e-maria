@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./imgs/favicon.png" type="image/x-icon">
+  <title>Login</title>
+  <link rel="stylesheet" href="./css/login.css" />
+</head>
+
+<body class="cadastro-page">
+
+  <!-- HEADER -->
+  <header>
+      <nav class="container">
+        <h1>Biblioteca Online</h1>
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="cadastro.html">Cadastre-se</a></li>
+          <li><a href="cadastrolivro.html">Cadastrar Livro</a></li>
+        </ul>
+      </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <section class="form-container">
+      <h2>Login</h2>
+
+      <form id="form-login">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" required>
+
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+      <p>
+        &copy; 2025 Biblioteca Online | Desenvolvido por Maria Longuim e
+        Gabrielli Kachio
+      </p>
+  </footer>
+
+  <!-- SCRIPT LOGIN -->
+  <script>
+    document.getElementById("form-login").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const dados = {
+        email: email.value,
+        senha: senha.value
+      };
+
+      const res = await fetch("http://127.0.0.1:1506/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+      });
+
+      if (!res.ok) {
+        alert(await res.text());
+        return;
+      }
+
+      const user = await res.json();
+
+      // SALVA OS DADOS DO USUÁRIO
+      localStorage.setItem("user_id", user.id);
+      localStorage.setItem("user_nome", user.nome);
+
+      alert("Login bem-sucedido!");
+      window.location.href = "index.html";
+    });
+  </script>
+
+</body>
+</html>

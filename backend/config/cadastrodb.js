@@ -8,10 +8,10 @@ const conexao = mysql.createConnection({
 });
 
 conexao.connect((erro) => {
-    if (erro) {
-        console.error('Erro ao conectar ao banco de dados:', erro);
-    } else {
-    console.log('Conectado ao banco de dados!');
+   if (erro) {
+    console.error('Erro ao conectar ao banco de dados:', erro);
+   } else {
+   console.log('Conectado ao banco de dados!');
     }
 });
 

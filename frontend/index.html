@@ -15,6 +15,11 @@
           <li><a href="index.html">Início</a></li>
           <li><a href="cadastro.html">Cadastre-se</a></li>
           <li><a href="cadastrolivro.html">Cadastrar Livro</a></li>
+          <li><a href="login.html">Login</a></li>
+         <li><button id="logout-btn" class="logout-btn" style="display:none;" type="button" onclick="fazerLogout()">
+      Logout
+    </button>
+  </li>
         </ul>
       </nav>
     </header>
@@ -93,8 +98,33 @@
         Gabrielli Kachio
       </p>
     </footer>
-   
-    <script src="js/livros.js"></script>
-    <script src="js/script.js"></script>
+    
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+    const logoutBtn = document.getElementById("logout-btn");
+    const userId = localStorage.getItem("user_id");
+
+    // Mostrar/esconder botão logout
+    if (userId) {
+      logoutBtn.style.display = "inline-block";
+    } else {
+      logoutBtn.style.display = "none";
+    }
+
+    // Logout
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("user_id");
+     localStorage.removeItem("user_nome");
+
+     alert("Você saiu da conta!");
+
+     window.location.reload(); // recarrega a página e aplica mudanças
+   });
+  });
+  </script> 
+  <script src="./js/script.js"></script>
+  <script src="./js/livros.js"></script>
+
   </body>
-</html>
+</html> 

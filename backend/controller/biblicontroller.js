@@ -1,72 +1,85 @@
 const biblimodel = require('../model/biblimodel.js');
 
+// SALVAR LIVRO
 exports.salvarLivro = (req, res) => {
-  const { titulo, autor, genero, descricao, imagem } = req.body;
+  const { titulo, autor, genero, descricao, imagem, user_id } = req.body;
 
-  const livros = { titulo, autor, genero, descricao, imagem };
+  if (!user_id) {
+    return res.status(401).send("Usuário não autenticado.");
+  }
+
+  const livros = { titulo, autor, genero, descricao, imagem, user_id };
+
   biblimodel.inserirLivro(livros, (err) => {
     if (err) {
-    console.error('ERRO MySQL:', err.code, err.sqlMessage); 
-    return res.status(500).send('Erro ao cadastrar livro: ' + err.sqlMessage);
+      console.error('ERRO MySQL:', err.code, err.sqlMessage); 
+      return res.status(500).send('Erro ao cadastrar livro: ' + err.sqlMessage);
     }
     res.send('Livro cadastrado com sucesso!');
   });
-}
+};
 
+// LISTAR LIVROS
 exports.listarLivros = (req, res) => {
   biblimodel.buscarLivros((err, results) => {
     if (err) {
       console.error('Erro ao buscar livros:', err);
       res.status(500).send('Erro ao buscar livros.');
     } else {
-      res.json(results); // devolve os livros pro front
+      res.json(results);
     }
   });
 };
 
+// DELETAR LIVRO
 exports.deletarLivro = (req, res) => {
   const id = req.params.id;
+  const user_id = req.query.user_id;
 
-  console.log("Requisição DELETE recebida! ID:", id);
-
-  if (!id) {
-    console.error("Nenhum ID recebido na requisição.");
-    return res.status(400).send("ID do livro não foi informado.");
+  if (!user_id) {
+    return res.status(401).send("Usuário não autenticado.");
   }
 
-  biblimodel.deletarLivro(id, (err, result) => {
+  biblimodel.deletarLivro(id, user_id, (err, result) => {
     if (err) {
       console.error("Erro ao excluir livro no MySQL:", err);
       return res.status(500).send("Erro ao excluir livro no banco de dados.");
     }
 
     if (result.affectedRows === 0) {
-      console.warn("Nenhum livro encontrado com o ID:", id);
-      return res.status(404).send("Livro não encontrado.");
+      return res.status(403).send("Você não tem permissão para excluir este livro.");
     }
 
-    console.log("Livro excluído com sucesso! ID:", id);
     res.send("Livro excluído com sucesso!");
   });
 };
 
+// ATUALIZAR LIVRO
 exports.atualizarLivro = (req, res) => {
   const id = req.params.id;
-  const { titulo, autor, genero, descricao, imagem } = req.body;
-  const livroAtualizado = { titulo, autor, genero, descricao, imagem };
+  const { titulo, autor, genero, descricao, imagem, user_id } = req.body;
 
-  console.log("Requisição PUT recebida para ID:", id);
-  console.log("Dados recebidos:", livroAtualizado);
+  if (!user_id) {
+    return res.status(401).send("Usuário não autenticado.");
+  }
+
+  const livroAtualizado = { titulo, autor, genero, descricao, imagem, user_id };
 
   biblimodel.atualizarLivro(id, livroAtualizado, (err, result) => {
     if (err) {
       console.error("Erro ao atualizar livro:", err);
       return res.status(500).send("Erro ao atualizar livro: " + err.sqlMessage);
     }
+
+    if (result.affectedRows === 0) {
+      return res.status(403).send("Você não tem permissão para editar este livro.");
+    }
+
     res.send("Livro atualizado com sucesso!");
   });
 };
 
+// BUSCAR LIVRO POR ID
 exports.buscarLivroPorId = (req, res) => {
   const id = req.params.id;
   const sql = "SELECT * FROM livros WHERE id = ?";
@@ -82,7 +95,7 @@ exports.buscarLivroPorId = (req, res) => {
       return res.status(404).send("Livro não encontrado.");
     }
 
-    res.json(results[0]); // envia o livro específico pro frontend
+    res.json(results[0]);
   });
 };
 
