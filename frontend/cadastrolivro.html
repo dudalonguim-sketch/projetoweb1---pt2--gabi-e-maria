@@ -59,7 +59,7 @@
       document.addEventListener("DOMContentLoaded", () => {
         const user_id = localStorage.getItem("user_id");
          if (!user_id) {
-          alert("Você precisa estar cadastrado para adicionar livros.");
+          alert("Você precisa estar cadastrado/logado para adicionar livros.");
           window.location.href = "login.html";
         }
 
