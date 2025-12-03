@@ -2,6 +2,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const main = document.querySelector("main.container");
   const categorias = ["Romance", "Suspense", "Fantasia"];
   const API = "http://localhost:1304/livros";
+  const paginasSemBusca = ["login.html", "cadastro.html", "cadastrolivro.html"];
+
+  const caminho = window.location.pathname;
+  const nomePagina = caminho.substring(caminho.lastIndexOf("/") + 1);
+  if (!paginasSemBusca.includes(nomePagina)) {
+  const busca = document.getElementById("buscaContainer");
+  if (busca) busca.style.display = "flex";
+  }
 
   const user_id = localStorage.getItem("user_id");
 
@@ -146,3 +154,22 @@ document.body.addEventListener("click", async (e) => {
   alert(await updateRes.text());
   location.reload();
 });
+
+const campoBusca = document.getElementById("campoBusca");
+
+if (campoBusca) {
+  campoBusca.addEventListener("input", () => {
+    const termo = campoBusca.value.toLowerCase().trim();
+    const livros = document.querySelectorAll(".livro");
+
+    livros.forEach((livro) => {
+      const titulo = livro.querySelector("h3")?.textContent.toLowerCase() || "";
+      const autor = livro.querySelector("p")?.textContent.toLowerCase() || "";
+
+      const corresponde =
+        titulo.includes(termo) || autor.includes(termo.replace("autor(a): ", ""));
+
+      livro.style.display = corresponde ? "block" : "none";
+    });
+  });
+}

@@ -27,12 +27,6 @@ header {
   color: white;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
 
 nav h1 {
   font-size: 1.5rem;
@@ -171,5 +165,38 @@ footer {
 
 .logout-btn:hover {
   background-color: #a9746e;
+  border-color: #a9746e;
+}
+
+nav.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  list-style: none;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 160px; 
+  transition: 0.2s;
+}
+
+.search-box input:focus {
+  width: 210px;
+  outline: none;
   border-color: #a9746e;
 }
