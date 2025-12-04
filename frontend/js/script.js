@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   main.innerHTML = "";
 
   categorias.forEach((genero) => {
-    // 🔥 Correção DEFINITIVA no filtro do gênero
     const livrosDoGenero = todosLivros.filter(
       (l) =>
         l.genero.trim().toLowerCase() === genero.trim().toLowerCase()
@@ -90,20 +89,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-// =============================
-//         EXCLUIR LIVRO
-// =============================
+
+//EXCLUIR LIVRO
 document.body.addEventListener("click", async (e) => {
   if (!e.target.classList.contains("btn-del")) return;
 
   const id = e.target.dataset.id;
   const user_id = localStorage.getItem("user_id");
 
-  // EVITA BUG fatal se não estiver logado
+  //se não estiver logado
   if (!user_id) {
     alert("Você precisa estar logado para excluir livros.");
     return;
   }
+
+  const confirmar = confirm("Deseja realmente deletar este livro?");
+  if (!confirmar) return; 
 
   try {
     const res = await fetch(`http://localhost:1304/livros/${id}?user_id=${user_id}`, {
@@ -120,10 +121,7 @@ document.body.addEventListener("click", async (e) => {
   }
 });
 
-
-// =============================
-//         EDITAR LIVRO
-// =============================
+//EDITAR LIVRO
 document.body.addEventListener("click", async (e) => {
   if (!e.target.classList.contains("btn-edit")) return;
 

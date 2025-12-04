@@ -10,7 +10,6 @@
 
 <body class="cadastro-page">
 
-  <!-- HEADER -->
   <header>
       <nav class="container">
         <h1>Biblioteca Online</h1>
@@ -22,7 +21,6 @@
       </nav>
   </header>
 
-  <!-- MAIN -->
   <main>
     <section class="form-container">
       <h2>Login</h2>
@@ -39,7 +37,6 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
       <p>
         &copy; 2025 Biblioteca Online | Desenvolvido por Maria Longuim e
@@ -47,7 +44,6 @@
       </p>
   </footer>
 
-  <!-- SCRIPT LOGIN -->
   <script>
     document.getElementById("form-login").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -70,7 +66,6 @@
 
       const user = await res.json();
 
-      // SALVA OS DADOS DO USUÁRIO
       localStorage.setItem("user_id", user.id);
       localStorage.setItem("user_nome", user.nome);
 

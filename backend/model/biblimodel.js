@@ -1,6 +1,5 @@
 const db = require('../config/db');
 
-// INSERIR LIVRO COM USER_ID
 const inserirLivro = (livros, callback) => {
   const sql = 'INSERT INTO livros (titulo, autor, genero, descricao, imagem, user_id) VALUES (?, ?, ?, ?, ?, ?)';
   const values = [
@@ -14,13 +13,11 @@ const inserirLivro = (livros, callback) => {
   db.query(sql, values, callback);
 };
 
-// BUSCAR TODOS OS LIVROS
 const buscarLivros = (callback) => {
   const sql = 'SELECT * FROM livros';
   db.query(sql, callback);
 };
 
-// DELETAR SOMENTE SE O LIVRO PERTENCE AO USUÁRIO
 function deletarLivro(id, user_id, callback) {
   const sql = "DELETE FROM livros WHERE id = ? AND user_id = ?";
   db.query(sql, [id, user_id], (err, result) => {
@@ -29,7 +26,6 @@ function deletarLivro(id, user_id, callback) {
   });
 }
 
-// ATUALIZAR SOMENTE SE PERTENCER AO USUÁRIO
 const atualizarLivro = (id, dados, callback) => {
   const sql = `
     UPDATE livros 

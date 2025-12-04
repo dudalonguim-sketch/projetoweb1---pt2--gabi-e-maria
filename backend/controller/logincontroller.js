@@ -15,7 +15,6 @@ exports.login = (req, res) => {
     bcrypt.compare(senha, usuario.senha, (err, ok) => {
       if (!ok) return res.status(401).send("Senha incorreta.");
 
-      // SUCESSO: devolve id e nome
       res.json({
         id: usuario.id,
         nome: usuario.nome,

@@ -16,7 +16,6 @@ exports.salvarCadastro = (req, res) => {
       return res.send('Usuário já cadastrado com esse CPF ou Email! Tente novamente.');
     }
 
-    // HASH DA SENHA
     bcrypt.hash(senha, 10, (err, hash) => {
       if (err) return res.status(500).send("Erro ao gerar hash.");
 

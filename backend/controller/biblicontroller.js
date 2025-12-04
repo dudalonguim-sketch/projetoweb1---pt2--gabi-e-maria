@@ -1,6 +1,5 @@
 const biblimodel = require('../model/biblimodel.js');
 
-// SALVAR LIVRO
 exports.salvarLivro = (req, res) => {
   const { titulo, autor, genero, descricao, imagem, user_id } = req.body;
 
@@ -19,7 +18,6 @@ exports.salvarLivro = (req, res) => {
   });
 };
 
-// LISTAR LIVROS
 exports.listarLivros = (req, res) => {
   biblimodel.buscarLivros((err, results) => {
     if (err) {
@@ -31,7 +29,6 @@ exports.listarLivros = (req, res) => {
   });
 };
 
-// DELETAR LIVRO
 exports.deletarLivro = (req, res) => {
   const id = req.params.id;
   const user_id = req.query.user_id;
@@ -54,7 +51,6 @@ exports.deletarLivro = (req, res) => {
   });
 };
 
-// ATUALIZAR LIVRO
 exports.atualizarLivro = (req, res) => {
   const id = req.params.id;
   const { titulo, autor, genero, descricao, imagem, user_id } = req.body;
@@ -79,7 +75,6 @@ exports.atualizarLivro = (req, res) => {
   });
 };
 
-// BUSCAR LIVRO POR ID
 exports.buscarLivroPorId = (req, res) => {
   const id = req.params.id;
   const sql = "SELECT * FROM livros WHERE id = ?";

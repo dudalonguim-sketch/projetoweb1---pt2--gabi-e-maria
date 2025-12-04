@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       livro = await res.json();
     } 
-    // Caso não tenha origem (link antigo)
+    // Caso não tenha origem 
     else {
       detalhes.innerHTML = "<p>Origem do livro não informada.</p>";
       return;
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Renderiza as informações com seu layout padrão
+    // Renderiza as informações com layout padrão
     detalhes.innerHTML = `
       <img src="${livro.imagem || 'imgs/padrao.png'}" alt="${livro.titulo}">
       <div>
