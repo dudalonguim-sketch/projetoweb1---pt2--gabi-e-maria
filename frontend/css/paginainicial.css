@@ -111,10 +111,9 @@ footer {
 }
 
 .livro {
-  box-shadow: 0 8px 24px rgba(108, 46, 12, 0.363); /* sombra*/
+  box-shadow: 0 8px 24px rgba(108, 46, 12, 0.363); 
 }
 
-/* --- Botões de ação minimalistas (sem fundo) --- */
 .acoes {
   display: flex;
   justify-content: center;
