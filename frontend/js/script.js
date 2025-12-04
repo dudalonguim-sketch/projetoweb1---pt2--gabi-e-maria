@@ -139,7 +139,6 @@ document.body.addEventListener("click", async (e) => {
 
   const titulo = prompt("Título:", livroAtual.titulo);
   const autor = prompt("Autor:", livroAtual.autor);
-  const genero = prompt("Gênero:", livroAtual.genero);
   const descricao = prompt("Descrição:", livroAtual.descricao);
   const imagem = prompt("Imagem (URL):", livroAtual.imagem);
 
